@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - Regex101 Clone</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Results</h2>
+        <!-- Display regex matches if available -->
+            {% if matches %}
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Regex Matches Found:</h4>
+                    <ul class="list-group">
+                        {% for match in matches %}
+                            <li class="list-group-item">{{ match }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{{ url_for('home') }}" class="btn btn-primary mt-3">Try Again</a>
+
+                </div>
+            {% endif %}
+            {% if email %}
+                <div class="alert alert-{{ 'success' if is_valid else 'danger' }}" role="alert">
+                    <h4 class="alert-heading">Email Validation Result:</h4>
+                    <ul><p>The email address "{{ email }}" is {{ 'valid' if is_valid else 'invalid' }}.</p></ul>
+                    <a href="{{ url_for('validate_email') }}" class="btn btn-primary mt-3">Try Again</a>
+                </div>
+            {% endif %}
+            {% if not matches and not email %}
+                <!-- Display a message if no data is available -->
+                <div class="alert alert-warning" role="alert">
+                    No data to display. Please try again.
+                </div>
+            {% endif %}
+            <!-- Provide a link to return to the home page -->
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
